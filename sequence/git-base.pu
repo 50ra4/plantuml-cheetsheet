@@ -1,0 +1,24 @@
+@startuml
+
+box "Local" #LightBlue
+participant "Working\nDirectory"
+participant "Staging\nArea"
+participant "Local\nRepository"
+end box
+
+box "Remote" #Pink
+participant "Remote\nRepository"
+end box
+
+"Working\nDirectory" -> "Staging\nArea" : git add
+"Staging\nArea" -> "Local\nRepository" : git commit
+"Local\nRepository" -> "Remote\nRepository" : git push
+
+alt レビューによる修正
+"Working\nDirectory" <- "Remote\nRepository" : git merge
+"Working\nDirectory" -> "Staging\nArea" : git add
+"Staging\nArea" -> "Local\nRepository" : git commit
+"Local\nRepository" -> "Remote\nRepository" : git push
+end
+
+@enduml
